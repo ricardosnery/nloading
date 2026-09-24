@@ -1,0 +1,66 @@
+.nloading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: transparent;
+}
+
+.nloading-overlay::before {
+    position: absolute;
+    inset: 0;
+    background: var(--nloading-overlay-color);
+    content: '';
+    opacity: var(--nloading-overlay-opacity);
+}
+
+.nloading-overlay__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-width: 5rem;
+    flex-direction: column;
+    align-items: center;
+    gap: .875rem;
+    color: #111827;
+}
+
+.dark .nloading-overlay__content { color: #f9fafb; }
+.nloading-overlay__status { display: flex; align-items: center; justify-content: center; gap: .5rem; }
+.nloading-overlay__logo { max-width: 10rem; object-fit: contain; }
+.nloading-overlay img.nloading-overlay__logo { height: auto; max-height: 3rem; }
+
+.nloading-overlay__spinner {
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 3px solid rgb(107 114 128 / 30%);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: nloading-spin .7s linear infinite;
+}
+
+.nloading-overlay__spinner-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    object-fit: contain;
+    animation: nloading-spin .7s linear infinite;
+}
+
+.nloading-overlay[data-spinner-animation="false"] .nloading-overlay__spinner,
+.nloading-overlay[data-spinner-animation="false"] .nloading-overlay__spinner-icon { animation: none; }
+.nloading-overlay__message { font-size: .875rem; }
+.nloading-overlay--top { align-items: flex-start; }
+.nloading-overlay--bottom { align-items: flex-end; }
+.nloading-overlay--top-left { align-items: flex-start; justify-content: flex-start; }
+.nloading-overlay--bottom-left { align-items: flex-end; justify-content: flex-start; }
+.nloading-overlay--top-right { align-items: flex-start; justify-content: flex-end; }
+.nloading-overlay--bottom-right { align-items: flex-end; justify-content: flex-end; }
+
+@keyframes nloading-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .nloading-overlay[data-spinner-animation="true"] .nloading-overlay__spinner,
+    .nloading-overlay[data-spinner-animation="true"] .nloading-overlay__spinner-icon { animation-duration: 1.8s; }
+}
